@@ -5,7 +5,7 @@ import model.Operation;
 import model.Soustraction;
 
 enum Op {
-	ADD, SUBSTRACT;
+	ADDITION, SOUSTRACTION;
 }
 
 public class Configuration {
@@ -22,9 +22,9 @@ public class Configuration {
 		
 		switch (this.op) 
 		{
-		case ADD: 
+		case ADDITION: 
 			return new Addition();
-		case SUBSTRACT:
+		case SOUSTRACTION:
 			return new Soustraction();
         }	
 		

@@ -2,7 +2,7 @@ package view;
 
 import java.util.Scanner;
 
-import control.Controller;
+import controller.Controller;
 
 public class View {
 	
@@ -12,7 +12,7 @@ public class View {
 		
 		System.out.print("Veuillez saisir un nombre : ");
 		double x = sc.nextDouble();
-		System.out.print("operation (ADD ou SUBSTRACT) : ");
+		System.out.print("operation (ADDITION ou SOUSTRACTION) : ");
 		String operation = sc.next();
 		System.out.print("Veuillez saisir un autre nombre : ");
 		double y = sc.nextDouble();
