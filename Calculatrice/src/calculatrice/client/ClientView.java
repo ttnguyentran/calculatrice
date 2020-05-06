@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import calculatrice.client.service.ClientSocket;
 import calculatrice.model.OperationModel;
+import calculatrice.utils.ApplicationProperties;
 
 public class ClientView {
 	
@@ -12,11 +13,19 @@ public class ClientView {
 	private OperationModel operationModel;
 	
 	public void afficher() throws ClassNotFoundException, IOException {
-		System.out.print("Veuillez saisir un nombre : ");
+		
+		String lang="FR";
+		if(lang.equals("FR"))
+			ApplicationProperties.getInstance("src/main/ressources/messages_fr.properties");
+		else if (lang.equals("EN"))
+			ApplicationProperties.getInstance("src/main/ressources/messages_en.properties");
+		
+		
+		System.out.print(ApplicationProperties.readProperty("FIRST_INPUT", ""));
 		double x = sc.nextDouble();
-		System.out.print("operation (+ ou -) : ");
+		System.out.print(ApplicationProperties.readProperty("CHOICE_OPERATER", ""));
 		char operation = sc.next().charAt(0);
-		System.out.print("Veuillez saisir un autre nombre : ");
+		System.out.print(ApplicationProperties.readProperty("SECOND_INPUT", ""));
 		double y = sc.nextDouble();
 		
 		this.operationModel = ClientSocket.call(new OperationModel(x, y, operation));

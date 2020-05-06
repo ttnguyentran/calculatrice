@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import calculatrice.server.controller.Calculate;
+import calculatrice.server.exception.CalculatriceException;
 import calculatrice.model.OperationModel;
 
 public class ServerService {
@@ -16,7 +17,7 @@ public class ServerService {
 	private static int PORT = 5000;
 	private static ServerSocket server;
 	
-	public static void launch() throws IOException, ClassNotFoundException {
+	public static void launch() throws IOException, ClassNotFoundException, CalculatriceException {
 		server = new ServerSocket(PORT);
 		LOGGER.log(Level.INFO, "Server running");
 		

@@ -2,7 +2,7 @@ package calculatrice.client;
 
 import java.io.IOException;
 
-public class Main {
+public class MainC {
 
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		ClientView view = new ClientView();
