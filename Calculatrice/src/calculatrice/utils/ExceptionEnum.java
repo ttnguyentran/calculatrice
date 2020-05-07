@@ -6,7 +6,8 @@ public enum ExceptionEnum {
 	METHOD_NOT_IMPLEMENTED(3, "method not implemented yet"),
 	OPERAND_IS_NOT_AN_INTEGER(4,"operand should be an integer"),
 	INPUT_MISMATCH(5,"input mismatch"),
-	SERVER_ERROR(6, "an error has occured on server side");
+	SERVER_ERROR(6, "an error has occured on server side"), 
+	CLIENT_ERROR(7, "an error has occured on client side");
 	
 	private final int code;
 	public int getCode() {

@@ -2,21 +2,53 @@ package main;
 
 import java.io.IOException;
 
-import calculatrice.client.ClientController;
-import calculatrice.client.ClientView;
+import calculatrice.client.MainC;
 import calculatrice.server.controller.ServerController;
 
-public class App {
+import calculatrice.server.exception.CalculatriceException;
+import calculatrice.utils.ApplicationProperties;
+import calculatrice.utils.ExceptionEnum;
+
+/**
+ * 
+ * @author Thien Thanh NGUYEN TRAN
+ * @author Narjess ZAYATI
+ *
+ */
 	
-/*	public static void main(String[] args) throws ClassNotFoundException, IOException {
+	public class App {
 		
-		ServerController server = new ServerController();
-		server.startServer();
+		public static void main(String[] args) {
+			String lang="FR";
+			if(lang.equals("FR"))
+				ApplicationProperties.getInstance("src/main/ressources/messages_fr.properties");
+			else if (lang.equals("EN"))
+				ApplicationProperties.getInstance("src/main/ressources/messages_en.properties");
+			ServerController controller = new ServerController();
+			
+			new Thread(new Runnable() {
+				public void run() {
+					try {
+							controller.startServer();
+							
+					} catch (CalculatriceException e) {
+						System.out.println(ApplicationProperties.readProperty
+								(ExceptionEnum.getNameFromCode(e.getCode()),e.getDefaultMessage()));
+					}catch(ClassNotFoundException | IOException e) {
+						}}
+				
+			}).start();
 		
-		ClientView view = new ClientView();
-		ClientController client = new ClientController(view);
-		client.showCalculatrice();
-		client.showResult();
+		new Thread(new Runnable() {
+			public void run() {
+					try {
+						MainC.launch();
+					}catch(ClassNotFoundException | IOException e) {
+						System.out.println(ApplicationProperties.readProperty
+									(ExceptionEnum.getNameFromCode(ExceptionEnum.SERVER_ERROR.getCode()),ExceptionEnum.SERVER_ERROR.getDefaultMessage()));
+				}
+			}}
+		).start();
+	
 	}
-*/	
-}
+	}

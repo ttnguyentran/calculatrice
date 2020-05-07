@@ -11,24 +11,26 @@ import calculatrice.utils.ExceptionEnum;
 
 public class ClientView {
 
-	private Scanner sc = new Scanner(System.in);
 	private OperationModel result;
 
 	public void afficher() throws ClassNotFoundException, IOException {
 		while (true) {
 			try {
-				String lang = "FR";
-				if (lang.equals("FR"))
+				@SuppressWarnings("resource")
+				String lang="EN";
+				if(lang.equals("FR"))
 					ApplicationProperties.getInstance("src/main/ressources/messages_fr.properties");
 				else if (lang.equals("EN"))
 					ApplicationProperties.getInstance("src/main/ressources/messages_en.properties");
-
-				System.out.print(ApplicationProperties.readProperty("FIRST_INPUT", "Choose a first number"));
+				Scanner sc = new Scanner(System.in);
+				
+				System.out.print(ApplicationProperties.readProperty("FIRST_INPUT", "Choose a first number "));
 				double x = sc.nextDouble();
-				System.out
-						.print(ApplicationProperties.readProperty("CHOICE_OPERATER", "What operation ? (+, -, /, *)"));
+				
+				System.out.print(ApplicationProperties.readProperty("CHOICE_OPERATER", "What operation ? (+, -, /, *) "));
 				char operation = sc.next().charAt(0);
-				System.out.print(ApplicationProperties.readProperty("SECOND_INPUT", "Input a second number"));
+				
+				System.out.print(ApplicationProperties.readProperty("SECOND_INPUT", "Input a second number "));
 				double y = sc.nextDouble();
 
 				try {
@@ -43,7 +45,8 @@ public class ClientView {
 				} catch (ClassNotFoundException | IOException e) {
 					System.out.println(ApplicationProperties.readProperty(
 							ExceptionEnum.getNameFromCode(ExceptionEnum.SERVER_ERROR.getCode()),
-							ExceptionEnum.INPUT_MISMATCH.getDefaultMessage()));
+							ExceptionEnum.SERVER_ERROR.getDefaultMessage()));
+					
 				}
 			} catch (InputMismatchException e) {
 				System.out.println(ApplicationProperties.readProperty(

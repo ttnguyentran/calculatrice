@@ -1,5 +1,6 @@
 package calculatrice.utils;
 
+import calculatrice.server.exception.CalculatriceException;
 import calculatrice.server.operations.Addition;
 import calculatrice.server.operations.Division;
 import calculatrice.server.operations.Multiplication;
@@ -15,23 +16,22 @@ public class Configuration {
 		this.op = ope;
 	}
 
-	public Operation configuration() {
-		
-		Operation o = new Addition();
+	public Operation configuration() throws CalculatriceException {
 		
 		switch (this.op) 
 		{
-		case '+': 
-			return new Addition();
-		case '-':
-			return new Soustraction();
-		case '/':
-			return new Division();
-		case '*':
-			return new Multiplication();
-        }	
-		
-		return o;
+			case '-':
+				return new Soustraction();
+			case '+': 
+				return new Addition();
+			case '/':
+				return new Division();
+			case '*':
+				return new Multiplication();
+			default :
+				throw new CalculatriceException(ExceptionEnum.UNKNOWN_OPERATION.getCode(), 
+                        ExceptionEnum.UNKNOWN_OPERATION.getDefaultMessage());
+	    }
 	}
 	
 }
